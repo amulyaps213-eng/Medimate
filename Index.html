@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediMate | Your Health Companion</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f8f6;
+      color: #193b38;
+    }
+    header {
+      background: #087f70;
+      color: white;
+      padding: 24px 18px;
+      border-radius: 0 0 24px 24px;
+    }
+    header h1 { margin: 0 0 8px; }
+    main { padding: 18px; max-width: 650px; margin: auto; }
+    .card {
+      background: white;
+      padding: 18px;
+      margin: 14px 0;
+      border-radius: 16px;
+      box-shadow: 0 3px 12px #173d3510;
+    }
+    h2 { font-size: 19px; }
+    button {
+      background: #087f70;
+      color: white;
+      border: 0;
+      padding: 11px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      margin: 4px 2px;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #bdcfca;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .muted { color: #526c66; line-height: 1.5; }
+    footer { text-align: center; padding: 20px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💚 MediMate</h1>
+    <p>Your friendly health companion</p>
+    <small>Simple tools for everyday wellness</small>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>👋 Welcome to MediMate!</h2>
+      <p class="muted">Explore wellness tips, plan appointments,
+      and build healthy habits in one place.</p>
+    </section>
+
+    <section class="card">
+      <h2>💧 Water Tracker</h2>
+      <p>Glasses today: <strong id="water">0</strong></p>
+      <button onclick="addWater()">+ Add a glass</button>
+      <button onclick="resetWater()">Reset</button>
+    </section>
+
+    <section class="card">
+      <h2>📅 Appointment Planner</h2>
+      <label for="appt">Choose a date</label>
+      <input id="appt" type="date">
+      <label for="reason">Appointment note</label>
+      <input id="reason" placeholder="e.g. General check-up">
+      <button onclick="saveAppointment()">Save appointment</button>
+      <p id="appointment" class="muted">No appointment saved yet.</p>
+    </section>
+
+    <section class="card">
+      <h2>🌿 Wellness Tips</h2>
+      <p class="muted" id="tip">Small healthy habits can make a difference.</p>
+      <button onclick="nextTip()">Next tip</button>
+    </section>
+
+    <section class="card">
+      <h2>🩺 Health Information</h2>
+      <p class="muted">Learn about general health topics from
+      reliable sources such as the World Health Organization.</p>
+      <button onclick="window.open('https://www.who.int/health-topics','_blank')">
+        Explore health topics
+      </button>
+    </section>
+
+    <section class="card">
+      <h2>🚨 Need urgent help?</h2>
+      <p class="muted">For a medical emergency, contact your local
+      emergency service or go to the nearest emergency department.
+      In India, dial 112 for emergency assistance.</p>
+    </section>
+
+    <footer>
+      Student project • MediMate Hackathon<br>
+      Not a substitute for professional medical advice.
+    </footer>
+  </main>
+
+  <script>
+    let glasses = 0;
+    function addWater() {
+      glasses++;
+      document.getElementById("water").textContent = glasses;
+    }
+    function resetWater() {
+      glasses = 0;
+      document.getElementById("water").textContent = glasses;
+    }
+    function saveAppointment() {
+      const date = document.getElementById("appt").value;
+      const reason = document.getElementById("reason").value.trim();
+      const output = document.getElementById("appointment");
+      if (!date || !reason) {
+        output.textContent = "Please enter a date and appointment note.";
+        return;
+      }
+      output.textContent = "Planned: " + reason + " on " + date +
+        ". This is saved only on this page, not sent to a clinic.";
+    }
+    const tips = [
+      "Take movement breaks throughout your day.",
+      "Wash your hands regularly to help prevent infections.",
+      "Aim for a consistent sleep routine.",
+      "Eat a balanced variety of foods.",
+      "Drink water regularly according to your needs."
+    ];
+    let tipIndex = 0;
+    function nextTip() {
+      tipIndex = (tipIndex + 1) % tips.length;
+      document.getElementById("tip").textContent = tips[tipIndex];
+    }
+  </script>
+</body>
+</html>
